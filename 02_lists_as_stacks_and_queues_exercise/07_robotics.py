@@ -57,3 +57,5 @@ while len(elements) > 0:
     else:
         not_processed_element = elements.popleft()
         elements.append(not_processed_element)
+
+# TODO: not ready
