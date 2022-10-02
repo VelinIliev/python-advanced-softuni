@@ -1,4 +1,5 @@
 from collections import deque
+
 robots = input().split(";")
 starting_time = input().split(":")
 
@@ -11,23 +12,22 @@ def convert_seconds_to_hh_mm_ss(seconds):
     hours = seconds // 3600
     minutes = (seconds - hours * 3600) // 60
     seconds = (seconds - hours * 3600 - minutes * 60)
+    while hours > 23:
+        hours -= 24
     return f'{hours:02d}:{minutes:02d}:{seconds:02d}'
 
 
-queue = deque()
-# working robots
-working = []
 # queue of elements to be processed
 elements = deque()
 
 # starting queue of robots
-for robot in robots:
+for i, robot in enumerate(robots):
     data = robot.split("-")
     name = data[0]
     processing_time = int(data[1])
-    queue.append([name, processing_time])
+    robots[i] = [name, processing_time, current_time]
 
-# preparing queue of elements
+# starting queue of elements
 while True:
     command = input()
     if command == "End":
@@ -36,26 +36,21 @@ while True:
         element = command
         elements.append(element)
 
-# processing_line
-while len(elements) > 0:
+# processing elements
+while elements:
     current_time += 1
-    # check for free robot
-    for i, robot in enumerate(working):
-        if robot[2] == current_time:
-            queue.append(working.pop(i))
+    current_product = elements.popleft()
     # assigning tasks to free robots
-    if len(queue) > 0:
-        current_robot = queue.popleft()
-        name = current_robot[0]
-        processing_time = current_robot[1]
-        starting_time = convert_seconds_to_hh_mm_ss(current_time)
-        current_element = elements.popleft()
-        end_time = current_time + processing_time
-        print(f'{name} - {current_element} [{starting_time}]')
-        working.append([name, processing_time, end_time])
+    for current_robot in robots:
+        end_time = int(current_robot[2])
+        if end_time <= current_time:
+            name = current_robot[0]
+            processing_time = int(current_robot[1])
+            starting_time = convert_seconds_to_hh_mm_ss(current_time)
+            end_time = current_time + processing_time
+            print(f'{name} - {current_product} [{starting_time}]')
+            current_robot[2] = end_time
+            break
     # rotating pending elements
     else:
-        not_processed_element = elements.popleft()
-        elements.append(not_processed_element)
-
-# TODO: not ready
+        elements.append(current_product)
