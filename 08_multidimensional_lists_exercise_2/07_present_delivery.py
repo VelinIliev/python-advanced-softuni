@@ -3,6 +3,7 @@ neighborhood_size = int(input())
 nice_kids = 0
 neighborhood = []
 santa_position = []
+nice_kids_with_present = 0
 directions = {
     "left": [0, -1],
     "right": [0, 1],
@@ -18,56 +19,72 @@ for row in range(neighborhood_size):
     if "V" in new_row:
         nice_kids += new_row.count("V")
 
-boundaries_rows = range(0, len(neighborhood))
-boundaries_cols = range(0, len(neighborhood[0]))
-start_nice_kids = nice_kids
 
-while True:
-    command = input()
-    if command == "Christmas morning":
-        break
+def check_direction(row, col, direction):
+    boundaries_rows = range(0, len(neighborhood))
+    boundaries_cols = range(0, len(neighborhood[0]))
+    new_row = row + directions[direction][0]
+    new_col = col + directions[direction][1]
+    if new_row in boundaries_rows and new_col in boundaries_cols:
+        return True
+
+
+def cookies_time(row, col):
+    presents = 0
+    with_presents = 0
+    for direction in directions.values():
+        new_row = row + direction[0]
+        new_col = col + direction[1]
+        if neighborhood[new_row][new_col] == "X":
+            presents += 1
+        elif neighborhood[new_row][new_col] == "V":
+            presents += 1
+            with_presents += 1
+        neighborhood[new_row][new_col] = "-"
+    return presents, with_presents
+
+
+def move_santa(row, col, direction):
+    neighborhood[row][col] = "-"
+    new_row = row + directions[direction][0]
+    new_col = col + directions[direction][1]
+    presents = 0
+    with_presents = 0
+    if neighborhood[new_row][new_col] == "V":
+        with_presents += 1
+        presents += 1
+    elif neighborhood[new_row][new_col] == "C":
+        p, w = cookies_time(new_row, new_col)
+        presents += p
+        with_presents += w
+    neighborhood[new_row][new_col] = "S"
+    return [new_row, new_col], presents, with_presents
+
+
+def final_output(number_of_presents, nice_kids, nice_kids_with_present):
+    if number_of_presents <= 0 and nice_kids > nice_kids_with_present:
+        print("Santa ran out of presents!")
+    for row in neighborhood:
+        print(" ".join(row))
+    if nice_kids == nice_kids_with_present:
+        print(f"Good job, Santa! {nice_kids} happy nice kid/s.")
     else:
-        direction = command
-        next_row = santa_position[0] + directions[direction][0]
-        next_col = santa_position[1] + directions[direction][1]
-        if next_row in boundaries_rows and next_col in boundaries_cols:
-            neighborhood[santa_position[0]][santa_position[1]] = "-"
-            santa_position = [next_row, next_col]
-            if neighborhood[next_row][next_col] == "C":
-                for x in directions.values():
-                    new_row = next_row + x[0]
-                    new_col = next_col + x[1]
-                    if neighborhood[new_row][new_col] == "V":
-                        number_of_presents -= 1
-                        nice_kids -= 1
-                    elif neighborhood[new_row][new_col] == "X":
-                        number_of_presents -= 1
-                    neighborhood[new_row][new_col] = "-"
-                    neighborhood[next_row][next_col] = "S"
-                    if number_of_presents <= 0:
-                        break
-            elif neighborhood[next_row][next_col] == "V":
-                number_of_presents -= 1
-                nice_kids -= 1
-                neighborhood[next_row][next_col] = "S"
-                if number_of_presents <= 0:
-                    break
-            neighborhood[next_row][next_col] = "S"
-    if nice_kids == 0:
+        no_presents = nice_kids - nice_kids_with_present
+        print(f'No presents for {no_presents} nice kid/s.')
+
+
+command = input()
+
+while command != "Christmas morning":
+    direction = command
+    row = santa_position[0]
+    col = santa_position[1]
+    if check_direction(row, col, direction):
+        santa_position, presents, with_presents = move_santa(row, col, direction)
+        number_of_presents -= presents
+        nice_kids_with_present += with_presents
+    if number_of_presents <= 0:
         break
-    # print()
-    # for x in neighborhood:
-    #     print(x)
+    command = input()
 
-if number_of_presents == 0:
-    print('Santa ran out of presents!')
-for x in neighborhood:
-    print(" ".join(x))
-if nice_kids:
-    print(f'No presents for {nice_kids} nice kid/s.')
-else:
-    print(f'Good job, Santa! {start_nice_kids} happy nice kid/s.')
-
-# print(nice_kids)
-
-# TODO: not ready
+final_output(number_of_presents, nice_kids, nice_kids_with_present)
