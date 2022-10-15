@@ -22,38 +22,20 @@ for direction in directions:
     col = bunny_position[1]
     sum_direction = 0
     path = []
-    if direction == "left":
-        while True:
+    while True:
+        if direction == "left":
             col -= 1
-            if col in col_boundaries and field[row][col] != "X":
-                sum_direction += field[row][col]
-                path.append([row, col])
-            else:
-                break
-    elif direction == "right":
-        while True:
+        elif direction == "right":
             col += 1
-            if col in col_boundaries and field[row][col] != "X":
-                sum_direction += field[row][col]
-                path.append([row, col])
-            else:
-                break
-    elif direction == "up":
-        while True:
+        elif direction == "up":
             row -= 1
-            if row in row_boundaries and field[row][col] != "X":
-                sum_direction += field[row][col]
-                path.append([row, col])
-            else:
-                break
-    elif direction == "down":
-        while True:
+        elif direction == "down":
             row += 1
-            if row in row_boundaries and field[row][col] != "X":
-                sum_direction += field[row][col]
-                path.append([row, col])
-            else:
-                break
+        if col in col_boundaries and row in row_boundaries and field[row][col] != "X":
+            sum_direction += field[row][col]
+            path.append([row, col])
+        else:
+            break
     if sum_direction >= max_sum and len(path) >= 1:
         max_sum = sum_direction
         max_path = path
