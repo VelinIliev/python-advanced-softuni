@@ -1,61 +1,45 @@
 size = int(input())
-directions = input().split()
-
+commands = input().split()
 field = []
+position = []
+total_coal = 0
 
 for row in range(size):
-    new_row = [x for x in input().split()]
+    new_row = input().split()
     field.append(new_row)
+    if "s" in new_row:
+        position = [row, new_row.index("s")]
+    if "c" in new_row:
+        total_coal += new_row.count("c")
 
-current_position = []
-coal = 0
-for row in range(len(field)):
-    for column in range(size):
-        if field[row][column] == "s":
-            current_position = [row, column]
-        elif field[row][column] == "c":
-            coal += 1
+boundaries_row = range(0, len(field))
+boundaries_col = range(0, len(field[0]))
+directions = {
+    'left': [0, -1],
+    'right': [0, 1],
+    'up': [-1, 0],
+    'down': [1, 0]
+}
+coal_collected = 0
+game_over = False
 
-boundaries = range(0, size)
-game_ended = False
-
-for direction in directions:
-    if game_ended:
-        break
-    neighbor = []
-    row = current_position[0]
-    column = current_position[1]
-    if direction == "left":
-        neighbor = [row, column - 1]
-    elif direction == "right":
-        neighbor = [row, column + 1]
-    elif direction == "up":
-        neighbor = [row - 1, column]
-    elif direction == "down":
-        neighbor = [row + 1, column]
-
-    if neighbor and neighbor[0] in boundaries and neighbor[1] in boundaries:
-        neighbor_row = neighbor[0]
-        neighbor_column = neighbor[1]
-        if field[neighbor_row][neighbor_column] == "*":
-            current_position = [neighbor_row, neighbor_column]
-        elif field[neighbor_row][neighbor_column] == "c":
-            field[neighbor_row][neighbor_column] = "*"
-            coal -= 1
-            current_position = [neighbor_row, neighbor_column]
-            if coal == 0:
-                game_ended = True
-                print(f'You collected all coal! ({neighbor_row}, {neighbor_column})')
-                break
-        elif field[neighbor_row][neighbor_column] == "e":
-            current_position = [neighbor_row, neighbor_column]
-            game_ended = True
-            print(f'Game over! ({neighbor_row}, {neighbor_column})')
+for direction in commands:
+    row = position[0] + directions[direction][0]
+    col = position[1] + directions[direction][1]
+    if row in boundaries_row and col in boundaries_col:
+        if field[row][col] == "c":
+            coal_collected += 1
+            field[row][col] = "*"
+        if field[row][col] == "e":
+            print(f'Game over! ({row}, {col})')
+            game_over = True
             break
+        if coal_collected == total_coal:
+            print(f'You collected all coal! ({row}, {col})')
+            game_over = True
+            break
+        position = [row, col]
 
-if not game_ended:
-    print(f'{coal} pieces of coal left. ({current_position[0]}, {current_position[1]})')
-
-# TODO: 90/100
-
-
+if not game_over:
+    number_of_remaining_coal = total_coal - coal_collected
+    print(f'{number_of_remaining_coal} pieces of coal left. ({position[0]}, {position[1]})')
