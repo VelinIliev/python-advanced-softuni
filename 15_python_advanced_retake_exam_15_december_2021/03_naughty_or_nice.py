@@ -9,35 +9,34 @@ def naughty_or_nice_list(*args, **kwargs):
         number, name = args[i].split("-")
         number = int(number)
         count = 0
-        for kid in santa_list:
-            if kid[0] == number:
+        for kid_n, kid_name in santa_list:
+            if kid_n == number:
                 count += 1
         if count == 1:
-            for x, kid in enumerate(santa_list):
+            for index, kid in enumerate(santa_list):
                 if kid[0] == number:
                     kids[name].append(kid[1])
-                    santa_list.pop(x)
+                    santa_list.pop(index)
     for name, key in kwargs.items():
         count = 0
-        for kid in santa_list:
-            if name == kid[1]:
+        for kide_n, kid_name in santa_list:
+            if name == kid_name:
                 count += 1
         if count == 1:
-            for y, kid in enumerate(santa_list):
+            for index, kid in enumerate(santa_list):
                 if name == kid[1]:
                     kids[key].append(name)
-                    santa_list.pop(y)
-                pass
-    for x, name in santa_list:
+                    santa_list.pop(index)
+
+    for _, name in santa_list:
         kids["Not found"].append(name)
+
     final_string = ""
 
-    for type, names in kids.items():
+    for type_of_kid, names in kids.items():
         if names:
-            if type != "Not found":
-                final_string += f'{type}: {", ".join(names)}\n'
-            else:
-                final_string += f'{type}: {", ".join(names)}'
+            final_string += f'{type_of_kid}: {", ".join(names)}\n'
+
     return final_string
 
 
