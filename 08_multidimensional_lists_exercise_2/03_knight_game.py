@@ -1,10 +1,5 @@
 size = int(input())
-field = []
-
-for row in range(size):
-    new_row = [x for x in input()]
-    field.append(new_row)
-
+field = [[x for x in input()] for row in range(size)]
 
 moves = [[-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1]]
 boundaries = range(0, len(field))
