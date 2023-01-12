@@ -10,14 +10,7 @@ while working_bees and nectar:
     if last_nectar >= first_bee:
         operation = honey_making_process.pop(0)
         if last_nectar > 0:
-            if operation == "+":
-                collected += abs(first_bee + last_nectar)
-            elif operation == "-":
-                collected += abs(first_bee - last_nectar)
-            elif operation == "*":
-                collected += abs(first_bee * last_nectar)
-            elif operation == "/":
-                collected += abs(first_bee / last_nectar)
+            collected += abs(eval(f'{first_bee}{operation}{last_nectar}'))
         working_bees.pop(0)
         nectar.pop()
     else:
