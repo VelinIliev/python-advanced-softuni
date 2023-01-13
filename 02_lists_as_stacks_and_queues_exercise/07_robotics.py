@@ -29,11 +29,10 @@ for i, robot in enumerate(robots):
 
 # starting queue of elements
 while True:
-    command = input()
-    if command == "End":
+    element = input()
+    if element == "End":
         break
     else:
-        element = command
         elements.append(element)
 
 # processing elements
@@ -54,3 +53,4 @@ while elements:
     # rotating pending elements
     else:
         elements.append(current_product)
+

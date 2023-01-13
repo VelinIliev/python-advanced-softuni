@@ -19,7 +19,6 @@ while no_crash:
             if queue:
                 current_car = queue.popleft()
                 for char in current_car:
-                    # print(char, green_light)
                     green_light -= 1
 
                     if green_light == -free_window_duration - 1:

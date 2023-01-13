@@ -2,24 +2,15 @@ number_of_commands = int(input())
 
 stack = []
 
+map_functions = {
+    1: lambda x: stack.append(x[1]),
+    2: lambda x: stack.pop() if stack else None,
+    3: lambda x: print(max(stack)) if stack else None,
+    4: lambda x: print(min(stack)) if stack else None,
+}
 for command in range(number_of_commands):
-    entry = input().split(" ")
-    # print(entry)
-    action = entry[0]
-    if action == "1":
-        number = int(entry[1])
-        stack.append(number)
-    elif action == '2':
-        if len(stack) > 0:
-            stack.pop()
-    elif action == '3':
-        if len(stack) > 0:
-            print(max(stack))
-    elif action == '4':
-        if len(stack) > 0:
-            print(min(stack))
-    # print(stack)
+    entry = [int(x) for x in input().split()]
+    map_functions[entry[0]](entry)
 
-stack = [str(x) for x in stack]
 stack.reverse()
-print(", ".join(stack))
+print(*stack, sep=", ")

@@ -1,7 +1,5 @@
-cups_capacity = input().split()
-cups_capacity = [int(x) for x in cups_capacity]
-bottles_capacity = input().split()
-bottles_capacity = [int(x) for x in bottles_capacity]
+cups_capacity = [int(x) for x in input().split()]
+bottles_capacity = [int(x) for x in input().split()]
 
 wasted_water = 0
 bottles_finished = False
