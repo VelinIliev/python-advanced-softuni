@@ -1,17 +1,7 @@
-numbers = input().split()
-first_set_len = int(numbers[0])
-second_set_len = int(numbers[1])
+first_set_len, second_set_len = map(lambda x: int(x), input().split())
 
-first_set = set()
-second_set = set()
-
-for number in range(first_set_len):
-    new_number = input()
-    first_set.add(new_number)
-for number in range(second_set_len):
-    new_number = input()
-    second_set.add(new_number)
+first_set = set(int(input()) for _ in range(first_set_len))
+second_set = set(int(input()) for _ in range(second_set_len))
 
 intersection = first_set & second_set
-for number in intersection:
-    print(number)
+[print(number) for number in intersection]

@@ -1,10 +1,5 @@
 number_of_usernames = int(input())
 
-usernames = set()
+usernames = set(input() for _ in range(number_of_usernames))
 
-for username in range(number_of_usernames):
-    new_username = input()
-    usernames.add(new_username)
-
-for username in usernames:
-    print(username)
+[print(username) for username in usernames]
