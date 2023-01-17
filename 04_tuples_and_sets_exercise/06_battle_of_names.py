@@ -4,12 +4,11 @@ even_set = set()
 odd_set = set()
 
 for row in range(1, number_of_lines + 1):
-    sum_name = sum([ord(x) for x in input()])
-    final_sum = int(sum_name / row)
-    if final_sum % 2 == 0:
-        even_set.add(final_sum)
+    sum_name = sum([ord(x) for x in input()]) // row
+    if sum_name % 2 == 0:
+        even_set.add(sum_name)
     else:
-        odd_set.add(final_sum)
+        odd_set.add(sum_name)
 
 even_sum = sum(even_set)
 odd_sum = sum(odd_set)
