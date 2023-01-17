@@ -28,6 +28,6 @@ while chocolate_milkshakes != 5 and chocolates and cups_of_milk:
 
 print('Great! You made all the chocolate milkshakes needed!') \
     if chocolate_milkshakes == 5 else print('Not enough milkshakes.')
-print(f'Chocolate: {", ".join(str(x) for x in chocolates) if chocolates else "empty"}')
-print(f'Milk: {", ".join(str(x) for x in cups_of_milk) if cups_of_milk else "empty"}')
+print(f'Chocolate: {", ".join(str(x) for x in chocolates) or "empty"}')
+print(f'Milk: {", ".join(str(x) for x in cups_of_milk) or "empty"}')
 

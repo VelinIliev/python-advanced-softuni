@@ -4,12 +4,8 @@ main_colors = []
 test_colors = ["red", "yellow", "blue", "orange", "purple", "green"]
 
 while colors:
-    if len(colors) > 1:
-        first_substring = colors.pop(0)
-        second_substring = colors.pop()
-    else:
-        first_substring = colors.pop()
-        second_substring = ""
+    first_substring = colors.pop(0)
+    second_substring = colors.pop() if colors else ''
 
     new_color_v1 = first_substring + second_substring
     new_color_v2 = second_substring + first_substring
@@ -21,7 +17,7 @@ while colors:
     else:
         first_substring = first_substring[:-1]
         second_substring = second_substring[:-1]
-        middle = int(len(colors) / 2)
+        middle = len(colors) // 2
         if first_substring != "":
             colors.insert(middle, first_substring)
         if second_substring != "":
