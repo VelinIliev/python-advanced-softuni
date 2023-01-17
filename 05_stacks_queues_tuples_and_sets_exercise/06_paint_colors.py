@@ -1,6 +1,7 @@
 colors = input().split()
 
 main_colors = []
+test_colors = ["red", "yellow", "blue", "orange", "purple", "green"]
 
 while colors:
     if len(colors) > 1:
@@ -13,11 +14,9 @@ while colors:
     new_color_v1 = first_substring + second_substring
     new_color_v2 = second_substring + first_substring
 
-    if new_color_v1 == "red" or new_color_v1 == "yellow" or new_color_v1 == "blue" or\
-            new_color_v1 == "orange" or new_color_v1 == "purple" or new_color_v1 == "green":
+    if new_color_v1 in test_colors:
         main_colors.append(new_color_v1)
-    elif new_color_v2 == "red" or new_color_v2 == "yellow" or new_color_v2 == "blue" or \
-            new_color_v2 == "orange" or new_color_v2 == "purple" or new_color_v2 == "green":
+    elif new_color_v2 in test_colors:
         main_colors.append(new_color_v2)
     else:
         first_substring = first_substring[:-1]
