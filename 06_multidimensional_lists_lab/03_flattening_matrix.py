@@ -1,14 +1,8 @@
+from functools import reduce
+
 rows = int(input())
 
-matrix = []
-for i in range(rows):
-    new_row = [int(x) for x in input().split(", ")]
-    for j in new_row:
-        matrix.append(j)
+matrix = [[int(x) for x in input().split(", ")] for row in range(rows)]
+matrix = reduce(lambda x, y: x + y, matrix)
 
 print(matrix)
-
-# matrix = [map(int, input().split(", ")) for _ in range(rows)]
-# print(matrix)
-# flattened = [num for row in matrix for num in row]
-# print(flattened)

@@ -1,22 +1,12 @@
 size = int(input())
 
-matrix = []
-for _ in range(size):
-    row = [x for x in input()]
-    matrix.append(row)
+matrix = [[x for x in input()] for row in range(size)]
 
 search_symbol = input()
-found = False
 
 for row in range(size):
-    if found:
+    if search_symbol in matrix[row]:
+        print(f'({row}, {matrix[row].index(search_symbol)})')
         break
-    for column in range(size):
-        if matrix[row][column] == search_symbol:
-            print(f'({row}, {column})')
-            found = True
-            break
-
-
-if not found:
+else:
     print(f'{search_symbol} does not occur in the matrix')

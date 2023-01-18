@@ -1,14 +1,5 @@
 matrix_size = int(input())
 
-matrix = []
+matrix = [[int(x) for x in input().split(" ")] for row in range(matrix_size)]
 
-for _ in range(matrix_size):
-    row = [int(x) for x in input().split(" ")]
-    matrix.append(row)
-
-sum_diagonal = 0
-
-for row in range(matrix_size):
-    sum_diagonal += matrix[row][row]
-
-print(sum_diagonal)
+print(sum([matrix[row][row] for row in range(matrix_size)]))
