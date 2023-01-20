@@ -1,6 +1,10 @@
 rows, columns = [int(x) for x in input().split()]
 
-matrix = [input().split() for _ in range(rows)]
+matrix = []
+for row in range(rows):
+    new_row = input().split()
+    matrix.append(new_row)
+# matrix = [input().split() for _ in range(rows)]
 
 while True:
     command = input()

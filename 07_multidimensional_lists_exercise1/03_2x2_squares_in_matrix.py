@@ -1,6 +1,10 @@
 rows, columns = [int(x) for x in input().split()]
 
-matrix = [[x for x in input().split()] for row in range(rows)]
+matrix = []
+for row in range(rows):
+    new_row = [x for x in input().split()]
+    matrix.append(new_row)
+# matrix = [[x for x in input().split()] for row in range(rows)]
 count = 0
 
 for x in range(rows - 1):

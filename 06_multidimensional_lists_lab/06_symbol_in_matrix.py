@@ -1,6 +1,11 @@
 size = int(input())
 
-matrix = [[x for x in input()] for row in range(size)]
+matrix = []
+
+for row in range(size):
+    new_row = [x for x in input()]
+    matrix.append(new_row)
+# matrix = [[x for x in input()] for row in range(size)]
 
 search_symbol = input()
 

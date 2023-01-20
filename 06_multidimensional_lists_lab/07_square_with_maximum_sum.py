@@ -1,6 +1,11 @@
 rows, columns = [int(x) for x in input().split(", ")]
 
-matrix = [[int(x) for x in input().split(", ")] for x in range(rows)]
+matrix = []
+for row in range(rows):
+    new_row = [int(x) for x in input().split(", ")]
+    matrix.append(new_row)
+
+# matrix = [[int(x) for x in input().split(", ")] for x in range(rows)]
 max_sum = 0
 max_sub_matrix = []
 
