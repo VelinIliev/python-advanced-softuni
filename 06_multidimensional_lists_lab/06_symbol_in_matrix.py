@@ -5,13 +5,19 @@ matrix = []
 for row in range(size):
     new_row = [x for x in input()]
     matrix.append(new_row)
-# matrix = [[x for x in input()] for row in range(size)]
 
 search_symbol = input()
 
+is_found = False
+
 for row in range(size):
-    if search_symbol in matrix[row]:
-        print(f'({row}, {matrix[row].index(search_symbol)})')
+    if is_found:
         break
-else:
+    for col in range(size):
+        if matrix[row][col] == search_symbol:
+            print(f'({row}, {col})')
+            is_found = True
+            break
+
+if not is_found:
     print(f'{search_symbol} does not occur in the matrix')

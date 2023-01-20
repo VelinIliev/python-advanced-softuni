@@ -5,7 +5,6 @@ for row in range(rows):
     new_row = [int(x) for x in input().split(", ")]
     matrix.append(new_row)
 
-# matrix = [[int(x) for x in input().split(", ")] for x in range(rows)]
 max_sum = 0
 max_sub_matrix = []
 
@@ -23,6 +22,7 @@ for y in range(rows - 1):
             max_sum = sum_2x2
             max_sub_matrix = sub_matrix
 
-print(f'{" ".join(str(x) for x in max_sub_matrix[0])}')
-print(f'{" ".join(str(x) for x in max_sub_matrix[1])}')
+for row in range(len(max_sub_matrix)):
+    print(f'{" ".join(str(x) for x in max_sub_matrix[row])}')
+
 print(max_sum)
