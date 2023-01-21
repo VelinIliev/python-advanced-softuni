@@ -1,7 +1,9 @@
 rows, columns = [int(x) for x in input().split()]
 start_string = input()
 
-if 1 <= rows <= 12 and 1 <= columns <= 12 and 1 <= len(start_string) <= 20 and " " not in start_string:
+if rows in range(1, 13) and columns in range(1, 13) \
+        and len(start_string) in range(1, 21) \
+        and " " not in start_string:
     start_string *= 20
     new_row = []
     new_matrix = []

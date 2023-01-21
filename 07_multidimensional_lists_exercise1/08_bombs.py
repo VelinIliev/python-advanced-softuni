@@ -7,6 +7,8 @@ for row in range(size):
     new_matrix.append(new_row)
 
 coordinates = input().split()
+directions = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]]
+boundaries = range(0, size)
 
 for data in coordinates:
     bomb = [int(x) for x in data.split(",")]
@@ -14,28 +16,12 @@ for data in coordinates:
     bomb_column = bomb[1]
     damage = new_matrix[bomb_row][bomb_column]
     if damage > 0:
-        boundaries = range(0, size)
-        neighbors = [
-            [bomb_row - 1, bomb_column],
-            [bomb_row - 1, bomb_column + 1],
-            [bomb_row, bomb_column + 1],
-            [bomb_row + 1, bomb_column + 1],
-            [bomb_row + 1, bomb_column],
-            [bomb_row + 1, bomb_column - 1],
-            [bomb_row, bomb_column - 1],
-            [bomb_row - 1, bomb_column - 1]
-        ]
-
-        valid_neighbors = []
-        for neighbor in neighbors:
-            if neighbor[0] in boundaries and neighbor[1] in boundaries:
-                valid_neighbors.append(neighbor)
-        for neighbor in valid_neighbors:
-            row = neighbor[0]
-            column = neighbor[1]
-            if new_matrix[row][column] > 0:
+        for direction in directions:
+            row = bomb_row + direction[0]
+            column = bomb_column + direction[1]
+            if row in boundaries and column in boundaries \
+                    and new_matrix[row][column] > 0:
                 new_matrix[row][column] -= damage
-
         new_matrix[bomb_row][bomb_column] = 0
 
 alive_cells = []
@@ -47,5 +33,4 @@ for row in range(len(new_matrix)):
 print(f"Alive cells: {len(alive_cells)}")
 print(f"Sum: {sum(alive_cells)}")
 
-for row in new_matrix:
-    print(" ".join([str(x) for x in row]))
+[print(" ".join([str(x) for x in row])) for row in new_matrix]

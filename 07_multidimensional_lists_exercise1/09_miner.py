@@ -30,7 +30,7 @@ for direction in commands:
         if field[row][col] == "c":
             coal_collected += 1
             field[row][col] = "*"
-        if field[row][col] == "e":
+        elif field[row][col] == "e":
             print(f'Game over! ({row}, {col})')
             game_over = True
             break
