@@ -5,9 +5,7 @@ for row in range(rows):
     new_row = [int(x) for x in input().split()]
     matrix.append(new_row)
 
-# matrix = [[int(x) for x in input().split()] for row in range(rows)]
-
-max_sum = 0
+max_sum = -1000000
 max_sub_matrix = []
 
 for row in range(rows - 2):
@@ -18,7 +16,7 @@ for row in range(rows - 2):
             new_row = [matrix[sub_row][sub_column] for sub_column in range(column, column + 3)]
             sum_3x3 += sum(new_row)
             sub_matrix.append(new_row)
-        if max_sum <= sum_3x3:
+        if max_sum < sum_3x3:
             max_sum = sum_3x3
             max_sub_matrix = sub_matrix
 

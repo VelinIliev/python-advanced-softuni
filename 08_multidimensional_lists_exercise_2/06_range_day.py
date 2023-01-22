@@ -35,7 +35,7 @@ for n in range(number_of_commands):
             row += steps
         matrix[row][col] = "A"
     elif action == "shoot":
-        if direction == "down" or direction == "up":
+        if direction in ['down', 'up']:
             if direction == "down":
                 start, end, step = row, 5, 1
             else:
@@ -46,7 +46,7 @@ for n in range(number_of_commands):
                     matrix[row1][col] = "."
                     hit_targets.append([row1, col])
                     break
-        elif direction == "left" or direction == "right":
+        elif direction in ["left", "right"]:
             if direction == "left":
                 start, end, step = col, -1, -1
             else:
@@ -59,7 +59,6 @@ for n in range(number_of_commands):
                     break
     if len(targets) == 0:
         break
-    print()
 
 if targets:
     print(f'Training not completed! {len(targets)} targets left.')
