@@ -1,16 +1,6 @@
-list_to_flatten = input().split("|")
+from functools import reduce
 
-final_list = []
+flatten_list = [[y for y in x.split()] for x in input().split("|")]
+flatten_list = reduce(lambda x, y: x + y, flatten_list[::-1])
 
-for i in range(len(list_to_flatten)):
-    new_row = list_to_flatten[i].split()
-    final_list.append(new_row)
-
-final_list = final_list[::-1]
-
-list_to_print = []
-for row in final_list:
-    for data in row:
-        list_to_print.append(data)
-
-print(" ".join(list_to_print))
+print(" ".join(flatten_list))
