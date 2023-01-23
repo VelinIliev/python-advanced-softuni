@@ -6,17 +6,16 @@ for row in range(size):
     matrix.append(new_row)
 # matrix = [[int(x) for x in input().split(" ")] for row in range(size)]
 
-# primary_diagonal = [(matrix[i][i]) for i in range(size)]
-# secondary_diagonal = [(matrix[i][abs(i - size + 1)]) for i in range(size)]
-primary_diagonal = []
+# primary_diagonal = sum([(matrix[i][i]) for i in range(size)])
+# secondary_diagonal = sum([(matrix[i][abs(i - size + 1)]) for i in range(size)])
+primary_diagonal = 0
+secondary_diagonal = 0
+
 for i in range(size):
-    primary_diagonal.append(matrix[i][i])
-
-secondary_diagonal = []
-for i in range(size):
-    secondary_diagonal.append(matrix[i][abs(i - size + 1)])
+    primary_diagonal += matrix[i][i]
+    secondary_diagonal += matrix[i][abs(i - size + 1)]
 
 
-difference = abs(sum(primary_diagonal) - sum(secondary_diagonal))
+difference = abs(primary_diagonal - secondary_diagonal)
 
 print(difference)
