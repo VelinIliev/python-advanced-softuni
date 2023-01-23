@@ -22,12 +22,12 @@ number_of_commands = int(input())
 
 
 def move(direction, steps):
-    new_row = current_position[0] + directions[direction][0] * steps
-    new_col = current_position[1] + directions[direction][1] * steps
-    if new_row in range(5) and new_col in range(5) and matrix[new_row][new_col] == '.':
+    current_row = current_position[0] + directions[direction][0] * steps
+    current_col = current_position[1] + directions[direction][1] * steps
+    if current_row in range(5) and current_col in range(5) and matrix[current_row][current_col] == '.':
         matrix[current_position[0]][current_position[1]] = "."
-        matrix[new_row][new_col] = 'A'
-        return [new_row, new_col]
+        matrix[current_row][current_col] = 'A'
+        return [current_row, current_col]
     else:
         return [current_position[0], current_position[1]]
 
@@ -50,8 +50,6 @@ def shoot(shoot_direction):
 
 
 for _ in range(number_of_commands):
-    row = current_position[0]
-    col = current_position[1]
     action, direction, *info = input().split()
     if action == 'move':
         steps = int(info[0])
