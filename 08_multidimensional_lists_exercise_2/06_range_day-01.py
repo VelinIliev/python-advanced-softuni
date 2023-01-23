@@ -20,33 +20,45 @@ directions = {
 }
 number_of_commands = int(input())
 
+
+def move(direction, steps):
+    new_row = current_position[0] + directions[direction][0] * steps
+    new_col = current_position[1] + directions[direction][1] * steps
+    if new_row in range(5) and new_col in range(5) and matrix[new_row][new_col] == '.':
+        matrix[current_position[0]][current_position[1]] = "."
+        matrix[new_row][new_col] = 'A'
+        return [new_row, new_col]
+    else:
+        return [current_position[0], current_position[1]]
+
+
+def shoot(shoot_direction):
+    current_row = current_position[0]
+    current_col = current_position[1]
+    while True:
+        check_row = current_row + directions[shoot_direction][0]
+        check_col = current_col + directions[shoot_direction][1]
+        if check_row not in range(0, 5) or check_col not in range(0, 5):
+            break
+        if matrix[check_row][check_col] == ".":
+            current_row = check_row
+            current_col = check_col
+        elif matrix[check_row][check_col] == "x":
+            targets_hit.append([check_row, check_col])
+            matrix[check_row][check_col] = "."
+            break
+
+
 for _ in range(number_of_commands):
     row = current_position[0]
     col = current_position[1]
     action, direction, *info = input().split()
     if action == 'move':
         steps = int(info[0])
-        new_row = row + directions[direction][0] * steps
-        new_col = col + directions[direction][1] * steps
-        if new_row in range(5) and new_col in range(5) and matrix[new_row][new_col] == '.':
-            matrix[row][col] = "."
-            matrix[new_row][new_col] = 'A'
-            current_position = [new_row, new_col]
+        current_position = move(direction, steps)
     elif action == 'shoot':
-        row_c = row
-        col_c = col
-        while True:
-            check_row = row_c + directions[direction][0]
-            check_col = col_c + directions[direction][1]
-            if check_row not in range(0, 5) or check_col not in range(0, 5):
-                break
-            if matrix[check_row][check_col] == ".":
-                row_c = check_row
-                col_c = check_col
-            elif matrix[check_row][check_col] == "x":
-                targets_hit.append([check_row, check_col])
-                matrix[check_row][check_col] = "."
-                break
+        shoot(direction)
+
     if len(targets_hit) == targets:
         print(f'Training completed! All {targets} targets hit.')
         break
