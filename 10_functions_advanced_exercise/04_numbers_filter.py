@@ -1,16 +1,12 @@
 def even_odd_filter(**kwargs):
+
     numbers = {}
     if 'odd' in kwargs:
-        numbers['odd'] = [x for x in kwargs['odd'] if x % 2 != 0]
+        numbers['odd'] = list(filter(lambda x: x % 2 != 0, kwargs['odd']))
     if 'even' in kwargs:
-        numbers['even'] = [x for x in kwargs['even'] if x % 2 == 0]
-
+        numbers['even'] = list(filter(lambda x: x % 2 == 0, kwargs['even']))
     sorted_numbers = sorted(numbers.items(), key=lambda x: -len(x[1]))
-
-    final_numbers = {}
-    for k, v in sorted_numbers:
-        final_numbers[k] = v
-    return final_numbers
+    return dict(sorted_numbers)
 
 
 print(even_odd_filter(

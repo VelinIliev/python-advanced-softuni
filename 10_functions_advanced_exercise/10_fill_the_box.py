@@ -1,19 +1,15 @@
 def fill_the_box(*args):
-    height = args[0]
-    length = args[1]
-    width = args[2]
+    print(args)
+    height, length, width, *elements = args
     box_size = height * length * width
-    index = 3
-    while True:
-        if args[index] == "Finish":
+    for element in elements:
+        if element == "Finish":
             break
         else:
-            box_size -= args[index]
-            index += 1
+            box_size -= element
     if box_size > 0:
         return f'There is free space in the box. You could put {box_size} more cubes.'
-    else:
-        return f'No more free space! You have {abs(box_size)} more cubes.'
+    return f'No more free space! You have {abs(box_size)} more cubes.'
 
 print(fill_the_box(2, 8, 2, 2, 1, 7, 3, 1, 5, "Finish"))
 
