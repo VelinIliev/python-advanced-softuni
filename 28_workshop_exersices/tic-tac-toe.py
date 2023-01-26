@@ -74,23 +74,29 @@ def modify_field(position, field, player):
     return field
 
 
+def check_connections(row, col, field, player_sign):
+    directions = ((-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1))
+    for direction in directions:
+        count = 1
+        check_row = row + direction[0]
+        check_col = col + direction[1]
+        while check_row in range(3) and check_col in range(3):
+            if field[check_row][check_col] == player_sign:
+                count += 1
+            check_row = check_row + direction[0]
+            check_col = check_col + direction[1]
+        if count >= 3:
+            return True
+    return False
+
+
 def check_for_victory(field, player):
     player_sign = player['sign']
-    directions = ((-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1))
     for row in range(len(field)):
         for col in range(len(field[0])):
             if field[row][col] == player_sign:
-                for direction in directions:
-                    count = 1
-                    check_row = row + direction[0]
-                    check_col = col + direction[1]
-                    while check_row in range(3) and check_col in range(3):
-                        if field[check_row][check_col] == player_sign:
-                            count += 1
-                        check_row = check_row + direction[0]
-                        check_col = check_col + direction[1]
-                    if count >= 3:
-                        return True
+                if check_connections(row, col, field, player_sign):
+                    return True
     return False
 
 
@@ -105,7 +111,8 @@ def main():
         position = choose_position(player, field)
         field = modify_field(position, field, player)
         if check_for_victory(field, player):
-            print(f"{player['name']} won!")
+            print_field(field)
+            print(f"{player['name']} won!\n")
             new_game = input("Do you wanna new game? [y/n]: ")
             while True:
                 if new_game.lower() in 'yn':
