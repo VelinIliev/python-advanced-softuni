@@ -1,3 +1,5 @@
+#TODO: to implement draw and the field is full!!!
+
 players = {}
 positions = {
     1: (0, 0),
