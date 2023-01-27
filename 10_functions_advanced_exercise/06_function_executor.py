@@ -1,12 +1,5 @@
 def func_executor(*args):
-    return_result = []
-
-    for func in args:
-        function_to_execute = func[0]
-        new_args = func[1]
-        result = function_to_execute(*new_args)
-        function_name = function_to_execute.__name__
-        return_result.append(f'{function_name} - {result}')
+    return_result = [f'{func.__name__} - {func(*new_args)}' for func, new_args in args]
     return "\n".join(return_result)
 
 

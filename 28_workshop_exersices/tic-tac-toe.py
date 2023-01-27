@@ -1,5 +1,3 @@
-#TODO: to implement draw and the field is full!!!
-
 players = {}
 positions = {
     1: (0, 0),
@@ -102,6 +100,15 @@ def check_for_victory(field, player):
     return False
 
 
+def field_is_full(field):
+    count_free_positions = 0
+    for row in field:
+        count_free_positions += row.count(" ")
+    if count_free_positions == 0:
+        return True
+    return False
+
+
 def main():
     field = initialisation()
     counter = 0
@@ -115,14 +122,19 @@ def main():
         if check_for_victory(field, player):
             print_field(field)
             print(f"{player['name']} won!\n")
-            new_game = input("Do you wanna new game? [y/n]: ")
-            while True:
-                if new_game.lower() in 'yn':
-                    break
-                new_game = input("Do you wanna new game? [y/n]: ")
-            if new_game.lower() == 'n':
+        elif field_is_full(field):
+            print_field(field)
+            print(f"Draw\n")
+        else:
+            continue
+        new_game = input("Do you wanna new game? [y/n]: ")
+        while True:
+            if new_game.lower() in 'yn':
                 break
-            counter = 0
-            field = initialisation()
+            new_game = input("Do you wanna new game? [y/n]: ")
+        if new_game.lower() == 'n':
+            break
+        counter = 0
+        field = initialisation()
 
 main()

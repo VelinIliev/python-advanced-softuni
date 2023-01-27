@@ -6,7 +6,7 @@ def age_assignment(*args, **kwargs):
         for person in persons:
             if person.startswith(first_letter):
                 persons[person] = age
-    return "\n".join(f'{x[0]} is {x[1]} years old.' for x in sorted(persons.items()))
+    return "\n".join(f'{name} is {years} years old.' for name, years in sorted(persons.items()))
 
 
 print(age_assignment("Peter", "George", G=26, P=19))

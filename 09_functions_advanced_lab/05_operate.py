@@ -1,36 +1,31 @@
+from functools import reduce
+
+
 def operate(operator, *args):
 
     def addition():
-        return sum([x for x in args])
+        return reduce(lambda x, y: x + y, args)
 
     def subtract():
-        result = args[0]
-        for i in range(1, len(args)):
-            result -= args[i]
-        return result
+        return reduce(lambda x, y: x - y, args)
 
     def multiply():
-        result = 1
-        for num in args:
-            result *= num
-        return result
+        return reduce(lambda x, y: x * y, args)
 
     def divide():
-        result = args[0]
-        for i in range(1, len(args)):
-            if args[i] == 0:
-                continue
-            result /= args[i]
-        return result
+        list_args = [x for x in args if x != 0]
+        return reduce(lambda x, y: x / y, list_args)
 
-    if operator == "+":
-        return addition()
-    elif operator == "-":
-        return subtract()
-    elif operator == "*":
-        return multiply()
-    elif operator == "/":
-        return divide()
+    operators = {
+        "+": addition(),
+        "-": subtract(),
+        "*": multiply(),
+        '/': divide(),
+    }
+    return operators[operator]
 
 
 print(operate("/", 10, 0, 4, 4))
+print(operate("+", 1, 2, 3))
+print(operate("-", 1, 2, 3))
+print(operate("*", 3, 4))

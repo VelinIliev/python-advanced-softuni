@@ -1,11 +1,10 @@
 def even_odd(*args):
     command = args[-1]
-    numbers = [x for x in args if type(x) == int]
     operations = {
-        'even': lambda x: [y for y in x if y % 2 == 0],
-        'odd': lambda x: [y for y in x if y % 2 != 0],
+        'even': lambda x: [num for num in x[:-1] if num % 2 == 0],
+        'odd': lambda x: [num for num in x[:-1] if num % 2 != 0],
     }
-    return operations[command](numbers)
+    return operations[command](args)
 
 
 print(even_odd(1, 2, 3, 4, 5, 6, "even"))

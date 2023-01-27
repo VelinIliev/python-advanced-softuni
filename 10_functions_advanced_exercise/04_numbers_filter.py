@@ -1,12 +1,9 @@
-def even_odd_filter(**kwargs):
-
-    numbers = {}
-    if 'odd' in kwargs:
-        numbers['odd'] = list(filter(lambda x: x % 2 != 0, kwargs['odd']))
-    if 'even' in kwargs:
-        numbers['even'] = list(filter(lambda x: x % 2 == 0, kwargs['even']))
-    sorted_numbers = sorted(numbers.items(), key=lambda x: -len(x[1]))
-    return dict(sorted_numbers)
+def even_odd_filter(**numbers):
+    if 'odd' in numbers:
+        numbers['odd'] = list(filter(lambda x: x % 2 != 0, numbers['odd']))
+    if 'even' in numbers:
+        numbers['even'] = list(filter(lambda x: x % 2 == 0, numbers['even']))
+    return dict(sorted(numbers.items(), key=lambda x: -len(x[1])))
 
 
 print(even_odd_filter(
