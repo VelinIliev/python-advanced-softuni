@@ -1,4 +1,5 @@
-from os import listdir
+import os
+from os import listdir, getcwd
 
 files = {}
 
@@ -16,3 +17,7 @@ with open('report.txt', 'w') as f:
     for extension, values in sorted(files.items()):
         f.write(f'.{extension}\n')
         [f.write(f'- - - {file}\n') for file in sorted(values)]
+
+print('******')
+print(listdir())
+# os.mkdir("test")

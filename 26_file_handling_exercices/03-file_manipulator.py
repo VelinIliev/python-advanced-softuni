@@ -28,6 +28,7 @@ while True:
         with open(f'{file_name}', 'w') as f:
             for line in lines:
                 f.write(f"{line}")
+        file.close()
     elif action == "Delete":
         try:
             os.remove(f'{file_name}')

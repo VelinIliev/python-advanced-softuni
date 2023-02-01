@@ -8,3 +8,5 @@ for e, line in enumerate(file):
             word = word.replace('-', '@').replace(',', '@').replace('.', '@').replace('!', '@').replace('?', '@')
             new_line.append(word)
         print(*new_line[::-1])
+
+file.close()

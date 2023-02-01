@@ -10,3 +10,4 @@ with open('output-02.txt', 'w') as f:
             elif letter in ".,-!?'":
                 count_punctuation += 1
         f.write(f'Line {n}: {line.strip()} ({count_letters})({count_punctuation})\n')
+file.close()

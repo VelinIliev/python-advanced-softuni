@@ -1,7 +1,7 @@
 file = open('numbers.txt', 'r')
 
-sum = 0
+sum_numbers = 0
 for line in file:
-    sum += int(line)
-
-print(sum)
+    sum_numbers += int(line)
+file.close()
+print(sum_numbers)
