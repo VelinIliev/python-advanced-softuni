@@ -50,6 +50,8 @@ def check_connections(row, col, player_sign):
         while check_row in range(rows) and check_col in range(columns):
             if field[check_row][check_col] == player_sign:
                 connections += 1
+            else:
+                connections = 0
             check_row = check_row + direction[0]
             check_col = check_col + direction[1]
         if connections >= 4:
