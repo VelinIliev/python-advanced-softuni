@@ -1,23 +1,36 @@
 import os
-from os import listdir, getcwd
 
 files = {}
 
-for file in listdir('directory_to_traverse'):
-    extension = file.split(".")[1]
-    if extension not in files:
-        files[extension] = []
-    files[extension].append(file)
+home_directory = input()
+directories_to_traverse = [home_directory]
 
-for extension, values in sorted(files.items()):
-    print(f'.{extension}')
-    [print(f'- - - {file}') for file in sorted(values)]
 
-with open('report.txt', 'w') as f:
-    for extension, values in sorted(files.items()):
-        f.write(f'.{extension}\n')
-        [f.write(f'- - - {file}\n') for file in sorted(values)]
+def extract_files(current_directory):
+    for file in os.listdir(current_directory):
+        if os.path.isfile(f'{current_directory}/{file}'):
+            *name, extension = file.split(".")
+            if extension not in files:
+                files[extension] = []
+            files[extension].append(file)
+        else:
+            directories_to_traverse.append(f'{current_directory}/{file}')
 
-print('******')
-print(listdir())
-# os.mkdir("test")
+
+def write_summary_to_file():
+    with open('report.txt', 'w') as f:
+        for extension, values in sorted(files.items()):
+            f.write(f'.{extension}\n')
+            [f.write(f'- - - {file}\n') for file in sorted(values)]
+            print(f'.{extension}')
+            [print(f'- - - {file}') for file in sorted(values)]
+
+
+while directories_to_traverse:
+    current_directory = directories_to_traverse.pop(0)
+    try:
+        extract_files(current_directory)
+    except FileNotFoundError:
+        print("Directory Not Found")
+
+write_summary_to_file()

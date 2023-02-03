@@ -1,12 +1,10 @@
-file = open('text.txt', 'r')
+symbols = ('-', ',', '.', '!', '?')
 
-
-for e, line in enumerate(file):
-    if e % 2 == 0 :
-        new_line = []
-        for word in line.split():
-            word = word.replace('-', '@').replace(',', '@').replace('.', '@').replace('!', '@').replace('?', '@')
-            new_line.append(word)
-        print(*new_line[::-1])
-
-file.close()
+with open('text.txt', 'r') as file:
+    text = file.readlines()
+    for e, line in enumerate(text):
+        if e % 2 != 0:
+            continue
+        for symbol in symbols:
+            line = line.replace(symbol, "@")
+        print(*line.split()[::-1])
