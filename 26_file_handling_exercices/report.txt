@@ -1,26 +1,26 @@
-.css
+.css - 1
 - - - style.css
-.docx
+.docx - 1
 - - - terms.docx
-.html
+.html - 2
 - - - index.html
 - - - test.html
-.js
+.js - 1
 - - - index.js
-.pptx
+.pptx - 1
 - - - demo.pptx
-.py
+.py - 6
 - - - 01_even_lines.py
 - - - 02_line_numbers.py
 - - - 03_file_manipulator.py
 - - - 04_directory_traversal.py
 - - - program.py
 - - - python.py
-.txt
+.txt - 5
 - - - log.txt
 - - - notes.txt
 - - - output.txt
 - - - report.txt
 - - - text.txt
-.xxx
+.xxx - 1
 - - - zzz.xxx

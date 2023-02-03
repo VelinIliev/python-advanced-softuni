@@ -10,6 +10,8 @@ def extract_files(current_directory):
     for file in os.listdir(current_directory):
         if os.path.isfile(f'{current_directory}/{file}'):
             *name, extension = file.split(".")
+            if not name:
+                continue
             if extension not in files:
                 files[extension] = []
             files[extension].append(file)
@@ -20,9 +22,9 @@ def extract_files(current_directory):
 def write_summary_to_file():
     with open('report.txt', 'w') as f:
         for extension, values in sorted(files.items()):
-            f.write(f'.{extension}\n')
+            f.write(f'.{extension} - {len(values)}\n')
             [f.write(f'- - - {file}\n') for file in sorted(values)]
-            print(f'.{extension}')
+            print(f'.{extension} - {len(values)}')
             [print(f'- - - {file}') for file in sorted(values)]
 
 
