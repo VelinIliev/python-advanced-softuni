@@ -51,12 +51,12 @@ def check_connections(row, col, player_sign):
             if field[check_row][check_col] == player_sign:
                 connections += 1
             else:
-                connections = 0
+                connections = 1
             check_row = check_row + direction[0]
             check_col = check_col + direction[1]
-        if connections >= 4:
-            winner_found = True
-            break
+            if connections >= 4:
+                winner_found = True
+                break
     return winner_found
 
 
