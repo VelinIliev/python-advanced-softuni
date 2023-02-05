@@ -80,13 +80,13 @@ def check_connections(row, col, field, player_sign):
         count = 1
         check_row = row + direction[0]
         check_col = col + direction[1]
-        while check_row in range(3) and check_col in range(3):
-            if field[check_row][check_col] == player_sign:
-                count += 1
+        while check_row in range(3) and check_col in range(3) and \
+                field[check_row][check_col] == player_sign:
+            count += 1
             check_row = check_row + direction[0]
             check_col = check_col + direction[1]
-        if count >= 3:
-            return True
+            if count >= 3:
+                return True
     return False
 
 
