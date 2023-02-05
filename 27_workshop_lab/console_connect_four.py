@@ -41,33 +41,29 @@ def insert_player_move(player, move):
 
 
 def check_connections(row, col, player_sign):
-    winner_found = False
     directions = ((-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1))
     for direction in directions:
         connections = 1
         check_row = row + direction[0]
         check_col = col + direction[1]
-        while check_row in range(rows) and check_col in range(columns):
-            if field[check_row][check_col] == player_sign:
-                connections += 1
-            else:
-                connections = 1
+        while check_row in range(rows) and check_col in range(columns)\
+                and field[check_row][check_col] == player_sign:
+            connections += 1
+            if connections >= 4:
+                return True
             check_row = check_row + direction[0]
             check_col = check_col + direction[1]
-            if connections >= 4:
-                winner_found = True
-                break
-    return winner_found
+    return False
 
 
 def check_for_winner(player):
     player_sign = 1 if player == "Player 1" else 2
-    winner_found = False
     for row in range(rows):
         for col in range(columns):
-            if field[row][col] == player_sign:
-                winner_found = check_connections(row, col, player_sign)
-    return winner_found
+            if field[row][col] == player_sign and \
+                    check_connections(row, col, player_sign):
+                return True
+    return False
 
 
 while game_on:
