@@ -17,10 +17,10 @@ for queen in queens:
     row, col = queen[0], queen[1]
     for direction in directions:
         check_position = [row, col]
-        while check_position[0] in range(0, size) and check_position[1] in range(0, size):
+        while check_position[0] in range(size) and check_position[1] in range(size):
             new_row = check_position[0] + direction[0]
             new_col = check_position[1] + direction[1]
-            if new_row in range(0, size) and new_col in range(0, size):
+            if new_row in range(size) and new_col in range(size):
                 if chessboard[new_row][new_col] == "Q":
                     break
                 if chessboard[new_row][new_col] == "K":
