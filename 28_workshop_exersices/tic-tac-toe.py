@@ -128,13 +128,10 @@ def main():
         else:
             continue
         new_game = input("Do you wanna new game? [y/n]: ")
-        while True:
-            if new_game.lower() in 'yn':
-                break
-            new_game = input("Do you wanna new game? [y/n]: ")
-        if new_game.lower() == 'n':
-            break
-        counter = 0
-        field = initialisation()
+        if new_game.lower() == 'y':
+            counter = 0
+            field = initialisation()
+        else:
+            game_is_on = False
 
 main()
