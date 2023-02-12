@@ -22,7 +22,7 @@ for peak, energy_needed in peaks.items():
 if len(conquered_peaks) == 5:
     print('Alex did it! He climbed all top five Pirin peaks in one week -> @FIVEinAWEEK')
 else:
-    print('Alex failed! He has to organize his journey better next time -> @PIRINWINS"')
+    print('Alex failed! He has to organize his journey better next time -> @PIRINWINS')
 if conquered_peaks:
     print(f"Conquered peaks:")
     print('\n'.join(conquered_peaks))

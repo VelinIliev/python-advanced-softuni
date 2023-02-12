@@ -21,5 +21,4 @@ if not customers:
 
 else:
     print("Out of ramen! You didn't manage to serve all customers.")
-    if customers:
-        print(f'Customers left: {", ".join(str(x) for x in customers )}')
+    print(f'Customers left: {", ".join(str(x) for x in customers )}')

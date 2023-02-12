@@ -34,6 +34,8 @@ while True:
     elif field[target_row][target_col] == "C":
         count_hits += 1
 
+    position = move_submarine(row, col, target_row, target_col)
+
     if count_mines == 3:
         print(f"Mission failed, U-9 disappeared! Last known coordinates [{target_row}, {target_col}]!")
         break
@@ -41,7 +43,6 @@ while True:
         print("Mission accomplished, U-9 has destroyed all battle cruisers of the enemy!")
         break
 
-    position = move_submarine(row, col, target_row, target_col)
 
-
+[print(*row, sep="") for row in field]
 
