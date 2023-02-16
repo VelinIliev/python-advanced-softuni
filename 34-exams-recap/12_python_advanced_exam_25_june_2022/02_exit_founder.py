@@ -8,8 +8,7 @@ skip_moves = []
 while True:
     move += 1
     coordinates = input().split(", ")
-    row_ = int(coordinates[0][1])
-    col = int(coordinates[1][0])
+    row_, col = int(coordinates[0][1]), int(coordinates[1][0])
 
     if move in skip_moves:
         skip_moves.pop(0)
