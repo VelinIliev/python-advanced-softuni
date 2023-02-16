@@ -1,7 +1,7 @@
-size = 6
+SIZE = 6
 players = input().split(", ")
 
-board = [[x for x in input().split()] for row in range(size)]
+board = [[x for x in input().split()] for row in range(SIZE)]
 move = 0
 skip_moves = []
 
@@ -12,7 +12,7 @@ while True:
     col = int(coordinates[1][0])
 
     if move in skip_moves:
-        pass
+        skip_moves.pop(0)
     elif board[row_][col] == 'E':
         print(f'{players[0]} found the Exit and wins the game!')
         break
